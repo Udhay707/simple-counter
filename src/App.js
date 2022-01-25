@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import Counter from './Components/Counter';
+import { useState } from 'react';
+import SumGet from './Components/SumGet';
 
 function App() {
+
+  const [sum, setSum] = useState(0);
+  function total(value) {
+    setSum(sum + Number(value));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='gridview'>
+        <Counter inc={1} func={total}/>
+        <Counter inc={5} func={total} />
+        <Counter inc="10" func={total} />
+        <Counter inc="50" func={total} />
+        <Counter inc="100" func={total} />
+        <Counter inc="200" func={total} />       
+      </div>
+      <SumGet sum={sum} />
+      <button className="app-btn" onClick={()=>setSum(0)}>Reset</button>
     </div>
   );
 }
